@@ -1,0 +1,4 @@
+fetch_page:
+    path: /fetch-page
+    controller: App\Controller\MoodleController::fetchPage
+    methods: [GET]

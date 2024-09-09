@@ -1,0 +1,46 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+    moodle_api_url: 'http://localhost/moodle/webservice/rest/server.php'
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    # Nouveau
+    # App\Controller\MoodleController:
+    #     arguments:
+    #         $client: '@http_client'
+    
+    # App\Service\MoodleService:
+    #     arguments:
+    #         $client: '@http_client'
+    #         $moodleToken: '%env(MOODLE_TOKEN)%'
+
+
+    # Au cas ou à supprimer
+    App\Service\EtudiantService:
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+    App\Service\FonctionService: ~
+    # App\Command\GenerateDtoCommand:
+    #     arguments:
+    #         $entityManager: '@doctrine.orm.entity_manager'
+    #         $filesystem: '@filesystem'
+    #     tags:
+    #         - { name: 'console.command' }
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones

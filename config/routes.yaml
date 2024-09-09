@@ -1,0 +1,8 @@
+controllers:
+    resource: ../src/Controller/
+    type: attribute
+
+etudiant_create:
+    path: /api/etudiants
+    controller: App\Controller\EtudiantController::create
+    methods: POST
